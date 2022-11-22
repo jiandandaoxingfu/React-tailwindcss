@@ -1,10 +1,69 @@
 import './App.css'
+import { useState } from 'react'
+import { Tab } from '@headlessui/react'
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
 
 function App() {
   const colors = ["bg-gradient-purple", "bg-gradient-red", "bg-gradient-white", "bg-gradient-upscayl", "bg-gradient-green", "bg-gradient-blue"]
+  const [theme, setTheme] = useState("cupcake");
+  document.getElementsByTagName('html')[0].setAttribute('data-theme', theme);
+  const categories = {
+    Recent: [
+      {
+        id: 1,
+        title: 'Does drinking coffee make you smarter?',
+        date: '5h ago',
+        commentCount: 5,
+        shareCount: 2,
+      },
+      {
+        id: 2,
+        title: "So you've bought coffee... now what?",
+        date: '2h ago',
+        commentCount: 3,
+        shareCount: 2,
+      },
+    ],
+    Popular: [
+      {
+        id: 1,
+        title: 'Is tech making coffee better or worse?',
+        date: 'Jan 7',
+        commentCount: 29,
+        shareCount: 16,
+      },
+      {
+        id: 2,
+        title: 'The most innovative things happening in coffee',
+        date: 'Mar 19',
+        commentCount: 24,
+        shareCount: 12,
+      },
+    ],
+    Trending: [
+      {
+        id: 1,
+        title: 'Ask Me Anything: 10 answers to your questions about coffee',
+        date: '2d ago',
+        commentCount: 9,
+        shareCount: 5,
+      },
+      {
+        id: 2,
+        title: "The worst advice we've ever heard about coffee",
+        date: '4d ago',
+        commentCount: 1,
+        shareCount: 2,
+      },
+    ],
+  }
 
   return (
     <div>
+      {/* Upscayl */}
       <div className="container flex flex-row h-screen w-screen mx-auto border-2 rounded-xl overflow-hidden">
         <div className="flex flex-col h-screen w-1/5 min-w-max bg-gray-600">
           {/* Header */}
@@ -114,6 +173,7 @@ function App() {
         </div>
       </div>
 
+      {/* daisyui */}
       <div className="container mt-10 flex flex-col items-center gap-4 w-screen mx-auto border-2 rounded-xl">
         <div className="grid grid-cols-3 gap-8 mt-4">
           <button className="btn">Button</button>
@@ -154,12 +214,6 @@ function App() {
           </div>
         </div>
 
-        <label className="swap swap-rotate">
-          <input type="checkbox" />
-          <svg className="swap-on fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>
-          <svg className="swap-off fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/></svg>    
-        </label>
-
         <div className="alert alert-success shadow-lg">
           <div>
             <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -169,13 +223,13 @@ function App() {
 
         <div className="avatar">
           <div className="w-24 rounded-full">
-            <img src="https://placeimg.com/192/192/people" />
+            <img alt="" src="https://placeimg.com/192/192/people" />
           </div>
         </div>
 
         <div className="avatar">
           <div className="w-24 mask mask-hexagon">
-            <img src="https://placeimg.com/192/192/people" />
+            <img alt="" src="https://placeimg.com/192/192/people" />
           </div>
         </div>
 
@@ -194,7 +248,7 @@ function App() {
           {
             new Array(6).join(',').split(',').map(() => 
               <div className="carousel-item w-full">
-                <img src="https://placeimg.com/256/400/arch" alt="" className="w-full" alt="Tailwind CSS Carousel component" />
+                <img src="https://placeimg.com/256/400/arch" className="w-full" alt="Tailwind CSS Carousel component" />
               </div> 
             )
           }
@@ -231,7 +285,7 @@ function App() {
         <div className="form-control gap-4 mb-10">
           <label className="cursor-pointer label">
             <span className="label-text mr-6">Remember me</span>
-            <input type="checkbox" checked className="checkbox checkbox-accent checkbox-md" />
+            <input type="checkbox" className="checkbox checkbox-accent checkbox-md" />
           </label>
           <input type="file" className="file-input file-input-bordered file-input-md w-full max-w-xs" />
           <div className="columns-2">
@@ -244,10 +298,10 @@ function App() {
               <input type="radio" name="radio-10" className="radio checked:bg-blue-500" checked />
             </label>
           </div>
-          <input type="range" min="0" max="100" value="40" className="range range-success" />
+          <input type="range" min="0" max="100" value="60" className="range range-success" />
           <div className="rating">
             <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-            <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" checked />
+            <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
             <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
             <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
             <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
@@ -255,7 +309,7 @@ function App() {
           <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
           <label className="cursor-pointer label">
             <span className="label-text">Remember me</span> 
-            <input type="checkbox" className="toggle toggle-primary" checked />
+            <input type="checkbox" className="toggle toggle-primary" />
           </label>
         </div>
         <div className="divider">OR</div>
@@ -292,6 +346,12 @@ function App() {
           </div>
         </div>
 
+        <label className="swap swap-rotate">
+          <input type="checkbox" onChange={ () => setTheme(theme === "dark" ? "cupcake" : "dark") }/> 
+          <svg className="swap-on fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>        
+          <svg className="swap-off fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/></svg>
+        </label>
+
         <div className="form-control">
           <label className="label">
             <span className="label-text">Enter amount</span>
@@ -303,7 +363,7 @@ function App() {
           </label>
         </div>
 
-        <img className="mask mask-hexagon" src="https://placeimg.com/160/160/arch" />
+        <img alt="" className="mask mask-hexagon" src="https://placeimg.com/160/160/arch" />
 
         <div className="form-control">
           <div className="input-group">
@@ -315,9 +375,121 @@ function App() {
         </div>
 
         <div className="tabs">
-          <a className="tab tab-lifted">Tab 1</a> 
-          <a className="tab tab-lifted tab-active">Tab 2</a> 
+          <a className="tab tab-lifted tab-active">Tab 1</a>
+          <a className="tab tab-lifted">Tab 2</a>
           <a className="tab tab-lifted">Tab 3</a>
+        </div>
+
+        <div className="w-full max-w-md px-2 sm:px-0">
+          <Tab.Group>
+            <Tab.List className="tabs">
+              {Object.keys(categories).map((category) => (
+                <Tab
+                  key={category}
+                  className={({ selected }) => classNames("tab tab-lifted", selected ? "tab-active" : "")}
+                >
+                  {category}
+                </Tab>
+              ))}
+            </Tab.List>
+            <Tab.Panels className="mt-2">
+              {Object.values(categories).map((posts, idx) => (
+                <Tab.Panel
+                  key={idx}
+                  className={classNames(
+                    'rounded-xl p-3',
+                    'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
+                  )}
+                >
+                  <ul>
+                    {posts.map((post) => (
+                      <li
+                        key={post.id}
+                        className="relative rounded-md p-3 hover:bg-gray-100"
+                      >
+                        <h3 className="text-sm font-medium leading-5">
+                          {post.title}
+                        </h3>
+    
+                        <ul className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-gray-500">
+                          <li>{post.date}</li>
+                          <li>&middot;</li>
+                          <li>{post.commentCount} comments</li>
+                          <li>&middot;</li>
+                          <li>{post.shareCount} shares</li>
+                        </ul>
+    
+                        <a className={classNames(
+                            'absolute inset-0 rounded-md',
+                            'ring-blue-400 focus:z-10 focus:outline-none focus:ring-2'
+                          )}>{post.id}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </Tab.Panel>
+              ))}
+            </Tab.Panels>
+          </Tab.Group>
+        </div>
+
+        <div className="w-full max-w-md px-2 py-16 sm:px-0">
+          <Tab.Group>
+            <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
+              {Object.keys(categories).map((category) => (
+                <Tab
+                  key={category}
+                  className={({ selected }) =>
+                    classNames(
+                      'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700',
+                      'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
+                      selected
+                        ? 'bg-white shadow'
+                        : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                    )
+                  }
+                >
+                  {category}
+                </Tab>
+              ))}
+            </Tab.List>
+            <Tab.Panels className="mt-2">
+              {Object.values(categories).map((posts, idx) => (
+                <Tab.Panel
+                  key={idx}
+                  className={classNames(
+                    'rounded-xl p-3',
+                    'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
+                  )}
+                >
+                  <ul>
+                    {posts.map((post) => (
+                      <li
+                        key={post.id}
+                        className="relative rounded-md p-3 hover:bg-gray-100"
+                      >
+                        <h3 className="text-sm font-medium leading-5">
+                          {post.title}
+                        </h3>
+    
+                        <ul className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-gray-500">
+                          <li>{post.date}</li>
+                          <li>&middot;</li>
+                          <li>{post.commentCount} comments</li>
+                          <li>&middot;</li>
+                          <li>{post.shareCount} shares</li>
+                        </ul>
+    
+                        <a className={classNames(
+                            'absolute inset-0 rounded-md',
+                            'ring-blue-400 focus:z-10 focus:outline-none focus:ring-2'
+                          )}>{post.id}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </Tab.Panel>
+              ))}
+            </Tab.Panels>
+          </Tab.Group>
         </div>
 
         <div className="mockup-code">
